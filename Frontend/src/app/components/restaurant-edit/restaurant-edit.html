@@ -1,0 +1,23 @@
+
+<div class="container mt-4">
+  <h2>Modifier restaurant</h2>
+
+  <form (ngSubmit)="save()">
+    <div class="mb-3">
+      <label>Nom</label>
+      <input class="form-control" [(ngModel)]="restaurant.nom" name="nom">
+    </div>
+
+    <div class="mb-3">
+      <label>Adresse</label>
+      <input class="form-control" [(ngModel)]="restaurant.adresse" name="adresse">
+    </div>
+
+    <div class="mb-3">
+      <label>Téléphone</label>
+      <input class="form-control" [(ngModel)]="restaurant.telephone" name="telephone">
+    </div>
+
+    <button class="btn btn-success">Enregistrer</button>
+  </form>
+</div>

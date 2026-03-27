@@ -1,0 +1,27 @@
+<div class="image_nav">
+<img *ngIf="restaurant.image"
+     [src]="'http://localhost:8083/' + restaurant.image"
+     class="img-fluid mb-3" class="header-image">
+  <div class="header-overlay">
+    <h1>Our Menu</h1>
+  </div>
+</div>
+<div class="container mt-4" *ngIf="restaurant">
+  <h2>{{ restaurant.nom }}</h2>
+  <p>{{ restaurant.description }}</p>
+  <h4>Menu</h4>
+  <ul>
+    <li *ngFor="let m of restaurant.menu">
+      {{ m.nom }} - {{ m.prix }} DT
+      <button matFab aria-label="Example icon button with a delete icon" (click)="deleteMenu(m.id!)" id="supprime">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+&nbsp;
+      <button matFab aria-label="Example icon button with a delete icon" (click)="editPlat(m.id!)" id="modifier">✏️
+      </button>
+    </li>
+  </ul>
+  <button matButton="filled" (click)="addMenu()">➕ Ajouter un plat</button>
+</div>
+

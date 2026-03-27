@@ -1,0 +1,27 @@
+
+<div class="container mt-4">
+  <h2>➕ Ajouter un restaurant</h2>
+  <form (ngSubmit)="save()" #restaurantForm="ngForm">
+    <div class="mb-3">
+      <label class="form-label">Nom</label>
+      <input type="text" class="form-control" [(ngModel)]="restaurant.nom" name="nom" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Adresse</label>
+      <input type="text" class="form-control" [(ngModel)]="restaurant.adresse" name="adresse" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Téléphone</label>
+      <input type="text" class="form-control" [(ngModel)]="restaurant.telephone" name="telephone">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Image</label>
+      <input type="file" class="form-control" accept="image/*" (change)="onFileSelected($event)">
+    </div>
+    <button matButton="filled">Save</button>
+    &nbsp;
+    &nbsp;
+    <a routerLink="/restaurants" matButton="outlined">Cancel</a>
+  </form>
+</div>
+

@@ -1,0 +1,58 @@
+<h2>{{ 'SETTINGS' | translate }}</h2>
+
+<div class="settings-container">
+
+  <!-- Dark Mode -->
+  <mat-card>
+    <mat-card-title>
+      {{ 'DARK_MODE' | translate }}
+    </mat-card-title>
+
+    <mat-slide-toggle (change)="toggleDarkMode($event.checked)">
+      {{ 'ENABLE_DARK_MODE' | translate }} 🌙
+    </mat-slide-toggle>
+  </mat-card>
+
+  <!-- Language -->
+  <mat-card>
+    <mat-card-title>
+      {{ 'LANGUAGE' | translate }}
+    </mat-card-title>
+
+    <mat-form-field appearance="outline">
+      <mat-label>
+        {{ 'SELECT_LANGUAGE' | translate }}
+      </mat-label>
+
+      <mat-select (selectionChange)="changeLanguage($event.value)">
+
+        <mat-option value="en">
+          {{ 'ENGLISH' | translate }}
+        </mat-option>
+
+        <mat-option value="fr">
+          {{ 'FRENCH' | translate }}
+        </mat-option>
+
+        <mat-option value="ar">
+          {{ 'ARABIC' | translate }}
+        </mat-option>
+
+      </mat-select>
+
+    </mat-form-field>
+  </mat-card>
+
+  <!-- Notifications -->
+  <mat-card>
+    <mat-card-title>
+      {{ 'NOTIFICATIONS' | translate }}
+    </mat-card-title>
+
+    <mat-slide-toggle (change)="toggleNotifications($event.checked)">
+      {{ 'ENABLE_NOTIFICATIONS' | translate }} 🔔
+    </mat-slide-toggle>
+
+  </mat-card>
+
+</div>

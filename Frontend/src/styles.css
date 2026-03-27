@@ -1,0 +1,59 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* LAYOUT PRINCIPAL */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 300px;
+  background-color: beige;
+  color: white;
+  padding: 20px;
+}
+
+/* CONTENU */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+#supprime{
+ width:30px;
+ height:30px;
+ background:#E6CFA9;
+}
+#modifier{
+ width:30px;
+ height:30px;
+ background:#E6CFA9;
+}
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode .sidenav {
+  background-color: #1e1e1e;
+  color:white;
+}
+
+body.dark-mode .toolbar {
+  background-color: #333;
+  color:white;
+}
+
+body.dark-mode mat-card {
+  background-color: #2a2a2a;
+  color: white;
+}
+
+body.dark-mode .content {
+  background-color: #121212;
+  color:white;
+}

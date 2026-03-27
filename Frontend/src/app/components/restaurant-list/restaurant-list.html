@@ -1,0 +1,23 @@
+<div class="row">
+  <div *ngFor="let r of restaurants" class="col-md-4 mb-4">
+
+      <mat-card class="example-card restaurant-card" appearance="outlined" (click)="goToDetail(r.id!)" style="cursor: pointer;">
+        <mat-card-header>
+          <mat-card-title>{{ r.nom }}</mat-card-title>
+          <mat-card-subtitle>{{ r.adresse }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image *ngIf="r.image" [src]="'http://localhost:8083/' + r.image" alt="Restaurant image">
+        <mat-card-content>
+          <p>
+            {{ r.typeCuisine }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button matButton="filled" (click)="delete(r.id!); $event.stopPropagation();">Supprimer</button>
+          <button matButton="outlined" (click)="softDelete(r.id!); $event.stopPropagation();">Cacher</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+
+  </div>

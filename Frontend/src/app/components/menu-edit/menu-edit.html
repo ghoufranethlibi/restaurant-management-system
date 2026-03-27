@@ -1,0 +1,20 @@
+
+<div *ngIf="menu" class="container mt-4">
+  <h3>Modifier le plat</h3>
+
+  <input class="form-control mb-2"
+         [(ngModel)]="menu.nom"
+         placeholder="Nom">
+
+  <input class="form-control mb-2"
+         [(ngModel)]="menu.description"
+         placeholder="Description">
+
+  <input class="form-control mb-2"
+         type="number"
+         [(ngModel)]="menu.prix"
+         placeholder="Prix">
+
+  <button class="btn btn-success" (click)="save()">Enregistrer</button>
+</div>
+

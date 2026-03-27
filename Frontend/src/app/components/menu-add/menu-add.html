@@ -1,0 +1,21 @@
+
+<div class="container mt-4">
+  <h2>➕ Ajouter un menu</h2>
+  <form (ngSubmit)="save()" #menuForm="ngForm">
+    <div class="mb-3">
+      <label class="form-label">Nom du plat</label>
+      <input type="text" class="form-control" [(ngModel)]="menu.nom" name="nom" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Prix</label>
+      <input type="number" class="form-control" [(ngModel)]="menu.prix" name="prix" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" [(ngModel)]="menu.description" name="description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    <a [routerLink]="['/menus', menu.restaurantId]" class="btn btn-secondary ms-2">Annuler</a>
+  </form>
+</div>
+

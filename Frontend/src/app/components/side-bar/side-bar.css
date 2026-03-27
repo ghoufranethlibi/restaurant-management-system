@@ -1,0 +1,39 @@
+.sidenav-container{
+height:100vh;
+}
+
+.sidenav{
+width:300px;
+background :#0F515F;
+}
+
+.spacer{
+flex:1 1 auto;
+}
+
+.content{
+padding:30px;
+}
+
+.toolbar{
+height:100px
+}
+
+.title{
+font-size:28px;
+font-weight:600;
+
+color:white;
+}
+mat-nav-list a {
+  margin: 8px 0;
+  border-radius: 8px;
+}
+.arrow_back{
+  font-size: 29px;
+  margin:5px
+}
+.elt_nav{
+font-size:20px;
+
+}

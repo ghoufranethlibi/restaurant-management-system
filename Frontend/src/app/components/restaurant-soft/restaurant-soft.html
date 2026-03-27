@@ -1,0 +1,44 @@
+
+<h2>Restaurants cachés</h2>
+
+<div *ngIf="loading; else content">
+  Chargement...
+</div>
+
+<ng-template #content>
+
+  <table class="table table-bordered" *ngIf="restaurants.length > 0; else empty">
+    <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Adresse</th>
+      <th>Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let r of restaurants">
+      <td>{{ r.nom }}</td>
+      <td>{{ r.adresse }}</td>
+      <td>{{ r.typeCuisine }}</td>
+      <td>
+      <button class="btn btn-danger btn-sm" (click)="delete(r.id!); $event.stopPropagation();">
+        Supprimer
+      </button>
+      </td>
+      <td>
+        <button
+          class="btn btn-success btn-sm"
+          (click)="restore(r.id!)">
+          Restaurer
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <ng-template #empty>
+    <p>Aucun restaurant caché</p>
+  </ng-template>
+
+</ng-template>
+
