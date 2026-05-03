@@ -1,23 +1,67 @@
+<div class="menu-wrapper">
 
-<h3>Menus</h3>
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Nom</th>
-    <th>Description</th>
-    <th>Prix</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let menu of menus">
-    <td>{{ menu.nom }}</td>
-    <td>{{ menu.description }}</td>
-    <td>{{ menu.prix | currency:'EUR' }}</td>
-    <td>
-      <a [routerLink]="['menus/edit', menu.id]" class="btn btn-sm btn-primary">Modifier</a>
-      <button class="btn btn-sm btn-danger" (click)="delete(menu.id!)">Supprimer</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+  <div class="menu-header">
+    <a class="back-btn" routerLink="/">
+      <span class="back-arrow">←</span>
+      Retour
+    </a>
+    <div class="header-divider"></div>
+    <h1 class="menu-title">Gestion des Menus</h1>
+    <p class="menu-subtitle">Liste des plats de cet établissement</p>
+  </div>
+
+  <div class="table-card">
+
+    <div class="table-header">
+      <span class="section-label">Tous les plats</span>
+      <span class="menu-count">{{ menus.length }} plat{{ menus.length > 1 ? 's' : '' }}</span>
+    </div>
+
+    <div class="empty-state" *ngIf="menus.length === 0">
+      <span class="empty-icon">🍽</span>
+      <p>Aucun plat disponible</p>
+    </div>
+
+    <div class="table-wrapper" *ngIf="menus.length > 0">
+      <table class="menu-table">
+        <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Prix</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr
+          *ngFor="let menu of menus; let i = index"
+          class="menu-row"
+          [style.animation-delay]="i * 50 + 'ms'"
+        >
+          <td class="td-nom">
+            <span class="row-index">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            {{ menu.nom }}
+          </td>
+          <td class="td-desc">{{ menu.description || '—' }}</td>
+          <td class="td-prix">
+            <span class="prix-badge">{{ menu.prix | currency:'EUR' }}</span>
+          </td>
+          <td class="td-actions">
+            <button
+              class="action-btn edit-btn"
+              [routerLink]="['menus/edit', menu.id]">
+              ✏ Modifier
+            </button>
+            <button
+              class="action-btn delete-btn"
+              (click)="delete(menu.id!)">
+              ✕ Supprimer
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

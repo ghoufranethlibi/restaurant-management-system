@@ -1,20 +1,84 @@
+<div class="edit-wrapper">
+  <div class="edit-header">
+    <a class="back-btn" routerLink="/">
+      <span class="back-arrow">←</span>
+      Retour
+    </a>
+    <div class="header-divider"></div>
+    <h1 class="edit-title">Modifier le plat</h1>
+    <p class="edit-subtitle">Mettez à jour les informations du plat</p>
+  </div>
 
-<div *ngIf="menu" class="container mt-4">
-  <h3>Modifier le plat</h3>
+  <div class="form-card" *ngIf="menu">
+    <form (ngSubmit)="save()">
 
-  <input class="form-control mb-2"
-         [(ngModel)]="menu.nom"
-         placeholder="Nom">
+      <div class="form-section">
+        <span class="section-label">Informations du plat</span>
+      </div>
 
-  <input class="form-control mb-2"
-         [(ngModel)]="menu.description"
-         placeholder="Description">
+      <div class="field-group">
+        <div class="field">
+          <label class="field-label" for="nom">
+            <span class="field-icon">✦</span> Nom du plat
+          </label>
+          <input
+            id="nom"
+            class="field-input"
+            type="text"
+            [(ngModel)]="menu.nom"
+            name="nom"
+            placeholder="Ex : Tajine d'agneau"
+            autocomplete="off"
+          />
+        </div>
 
-  <input class="form-control mb-2"
-         type="number"
-         [(ngModel)]="menu.prix"
-         placeholder="Prix">
+        <div class="field">
+          <label class="field-label" for="description">
+            <span class="field-icon">✦</span> Description
+          </label>
+          <textarea
+            id="description"
+            class="field-input field-textarea"
+            [(ngModel)]="menu.description"
+            name="description"
+            placeholder="Ex : Mijotée aux épices douces..."
+            rows="3"
+          ></textarea>
+        </div>
 
-  <button class="btn btn-success" (click)="save()">Enregistrer</button>
+        <div class="field">
+          <label class="field-label" for="prix">
+            <span class="field-icon">✦</span> Prix (DT)
+          </label>
+          <div class="prix-wrapper">
+            <span class="prix-prefix">DT</span>
+            <input
+              id="prix"
+              class="field-input prix-input"
+              type="number"
+              [(ngModel)]="menu.prix"
+              name="prix"
+              min="0"
+              step="0.1"
+              placeholder="0.00"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <a class="btn-cancel" routerLink="/">Annuler</a>
+        <button type="submit" class="btn-save">
+          <span class="save-icon">✓</span>
+          Enregistrer les modifications
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="loading-state" *ngIf="!menu">
+    <div class="spinner"></div>
+    <p>Chargement du plat...</p>
+  </div>
 </div>
-

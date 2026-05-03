@@ -10,7 +10,8 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   selector: 'app-menu-add',
   imports: [CommonModule, FormsModule,RouterModule],
-  templateUrl: './menu-add.html'
+  templateUrl: './menu-add.html',
+  styleUrl: './menu-add.css'
 })
 export class MenuAddComponent implements OnInit {
   restaurantId!: string;

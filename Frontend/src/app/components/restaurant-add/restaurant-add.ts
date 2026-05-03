@@ -12,7 +12,8 @@ import { ViewChild, ElementRef } from '@angular/core';
   standalone: true,
   selector: 'app-restaurant-add',
   imports: [CommonModule, FormsModule,NgbModule, RouterModule,MatButtonModule],
-  templateUrl: './restaurant-add.html'
+  templateUrl: './restaurant-add.html',
+  styleUrl: './restaurant-add.css'
 })
 export class RestaurantAddComponent {
 

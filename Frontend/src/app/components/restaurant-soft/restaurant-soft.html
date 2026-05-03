@@ -1,44 +1,72 @@
+<div class="soft-wrapper">
 
-<h2>Restaurants cachés</h2>
+  <div class="soft-header">
+    <a class="back-btn" routerLink="/">
+      <span class="back-arrow">←</span>
+      Retour
+    </a>
+    <div class="header-divider"></div>
+    <h1 class="soft-title">Restaurants cachés</h1>
+    <p class="soft-subtitle">Gérez les établissements désactivés</p>
+  </div>
 
-<div *ngIf="loading; else content">
-  Chargement...
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Chargement...</p>
+  </div>
+
+  <div class="table-card" *ngIf="!loading">
+
+    <div class="table-header">
+      <span class="section-label">Établissements masqués</span>
+      <span class="count-badge">{{ restaurants.length }} restaurant{{ restaurants.length > 1 ? 's' : '' }}</span>
+    </div>
+
+    <div class="empty-state" *ngIf="restaurants.length === 0">
+      <span class="empty-icon">👁</span>
+      <p>Aucun restaurant caché</p>
+    </div>
+
+    <div class="table-wrapper" *ngIf="restaurants.length > 0">
+      <table class="soft-table">
+        <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Adresse</th>
+          <th>Type de cuisine</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr
+          *ngFor="let r of restaurants; let i = index"
+          class="table-row"
+          [style.animation-delay]="i * 50 + 'ms'"
+        >
+          <td class="td-nom">
+            <span class="row-index">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            {{ r.nom }}
+          </td>
+          <td class="td-muted">{{ r.adresse }}</td>
+          <td>
+            <span class="type-badge">{{ r.typeCuisine || '—' }}</span>
+          </td>
+          <td class="td-actions">
+            <button
+              class="action-btn restore-btn"
+              (click)="restore(r.id!)">
+              ↩ Restaurer
+            </button>
+            <button
+              class="action-btn delete-btn"
+              (click)="delete(r.id!); $event.stopPropagation()">
+              ✕ Supprimer
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 </div>
-
-<ng-template #content>
-
-  <table class="table table-bordered" *ngIf="restaurants.length > 0; else empty">
-    <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Adresse</th>
-      <th>Type</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let r of restaurants">
-      <td>{{ r.nom }}</td>
-      <td>{{ r.adresse }}</td>
-      <td>{{ r.typeCuisine }}</td>
-      <td>
-      <button class="btn btn-danger btn-sm" (click)="delete(r.id!); $event.stopPropagation();">
-        Supprimer
-      </button>
-      </td>
-      <td>
-        <button
-          class="btn btn-success btn-sm"
-          (click)="restore(r.id!)">
-          Restaurer
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-
-  <ng-template #empty>
-    <p>Aucun restaurant caché</p>
-  </ng-template>
-
-</ng-template>
-

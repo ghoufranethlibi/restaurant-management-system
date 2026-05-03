@@ -1,23 +1,82 @@
+<div class="edit-wrapper">
 
-<div class="container mt-4">
-  <h2>Modifier restaurant</h2>
+  <div class="edit-header">
+    <a class="back-btn" routerLink="/">
+      <span class="back-arrow">←</span>
+      Retour
+    </a>
+    <div class="header-divider"></div>
+    <h1 class="edit-title">Modifier le restaurant</h1>
+    <p class="edit-subtitle">Mettez à jour les informations de l'établissement</p>
+  </div>
 
-  <form (ngSubmit)="save()">
-    <div class="mb-3">
-      <label>Nom</label>
-      <input class="form-control" [(ngModel)]="restaurant.nom" name="nom">
-    </div>
+  <div class="form-card" *ngIf="restaurant">
+    <form (ngSubmit)="save()">
 
-    <div class="mb-3">
-      <label>Adresse</label>
-      <input class="form-control" [(ngModel)]="restaurant.adresse" name="adresse">
-    </div>
+      <div class="form-section">
+        <span class="section-label">Informations générales</span>
+      </div>
 
-    <div class="mb-3">
-      <label>Téléphone</label>
-      <input class="form-control" [(ngModel)]="restaurant.telephone" name="telephone">
-    </div>
+      <div class="field-group">
+        <div class="field">
+          <label class="field-label" for="nom">
+            <span class="field-icon">✦</span> Nom de l'établissement
+          </label>
+          <input
+            id="nom"
+            class="field-input"
+            [(ngModel)]="restaurant.nom"
+            name="nom"
+            placeholder="Ex : Le Jardin des Saveurs"
+            autocomplete="off"
+          />
+        </div>
 
-    <button class="btn btn-success">Enregistrer</button>
-  </form>
+        <div class="field">
+          <label class="field-label" for="adresse">
+            <span class="field-icon">✦</span> Adresse
+          </label>
+          <input
+            id="adresse"
+            class="field-input"
+            [(ngModel)]="restaurant.adresse"
+            name="adresse"
+            placeholder="Ex : 12 Rue de la Paix, Paris"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="telephone">
+            <span class="field-icon">✦</span> Téléphone
+          </label>
+          <input
+            id="telephone"
+            class="field-input"
+            [(ngModel)]="restaurant.telephone"
+            name="telephone"
+            placeholder="Ex : +33 1 23 45 67 89"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="button" class="btn-cancel" routerLink="/restaurants">
+          Annuler
+        </button>
+        <button type="submit" class="btn-save">
+          <span class="save-icon">✓</span>
+          Enregistrer les modifications
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="loading-state" *ngIf="!restaurant">
+    <div class="spinner"></div>
+    <p>Chargement du restaurant...</p>
+  </div>
+
 </div>

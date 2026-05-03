@@ -1,23 +1,77 @@
-<div class="row">
-  <div *ngFor="let r of restaurants" class="col-md-4 mb-4">
-
-      <mat-card class="example-card restaurant-card" appearance="outlined" (click)="goToDetail(r.id!)" style="cursor: pointer;">
-        <mat-card-header>
-          <mat-card-title>{{ r.nom }}</mat-card-title>
-          <mat-card-subtitle>{{ r.adresse }}</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image *ngIf="r.image" [src]="'http://localhost:8083/' + r.image" alt="Restaurant image">
-        <mat-card-content>
-          <p>
-            {{ r.typeCuisine }}
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button matButton="filled" (click)="delete(r.id!); $event.stopPropagation();">Supprimer</button>
-          <button matButton="outlined" (click)="softDelete(r.id!); $event.stopPropagation();">Cacher</button>
-        </mat-card-actions>
-      </mat-card>
-
-    </div>
-
+<div class="page-wrapper">
+  <div class="page-header">
+    <div class="header-accent"></div>
+    <h1 class="page-title">Nos Restaurants</h1>
+    <p class="page-subtitle">Découvrez notre sélection de tables d'exception</p>
   </div>
+
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Chargement en cours...</p>
+  </div>
+
+  <div class="restaurant-grid" *ngIf="!loading">
+    <div
+      *ngFor="let r of restaurants; let i = index"
+      class="card-wrapper"
+      [style.animation-delay]="i * 80 + 'ms'"
+    >
+      <mat-card
+        class="restaurant-card"
+        appearance="outlined"
+        (click)="goToDetail(r.id!)"
+      >
+        <div class="card-image-wrapper">
+          <img
+            *ngIf="r.image"
+            [src]="'http://localhost:8083/' + r.image"
+            alt="Restaurant image"
+            class="card-img"
+          />
+          <div *ngIf="!r.image" class="card-img-placeholder">
+            <span class="placeholder-icon">🍽</span>
+          </div>
+          <div class="card-overlay"></div>
+          <span class="cuisine-badge">{{ r.typeCuisine }}</span>
+        </div>
+
+        <div class="card-body">
+          <div class="card-info">
+            <h2 class="card-title">{{ r.nom }}</h2>
+            <p class="card-address">
+              <span class="address-icon">📍</span>
+              {{ r.adresse }}
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <button
+              class="btn btn-edit"
+              [routerLink]="['/restaurants/edit', r.id]"
+              (click)="$event.stopPropagation()"
+            >
+              ✏ Modifier
+            </button>
+            <button
+              class="btn btn-danger"
+              (click)="delete(r.id!); $event.stopPropagation()"
+            >
+              Supprimer
+            </button>
+            <button
+              class="btn btn-ghost"
+              (click)="softDelete(r.id!); $event.stopPropagation()"
+            >
+              Cacher
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && restaurants.length === 0">
+    <p class="empty-icon">🍽</p>
+    <p class="empty-text">Aucun restaurant disponible</p>
+  </div>
+</div>

@@ -8,7 +8,8 @@ import { RouterModule} from '@angular/router';
   standalone: true,
   selector: 'app-restaurant-soft',
   imports: [CommonModule, RouterModule],
-  templateUrl: './restaurant-soft.html'
+  templateUrl: './restaurant-soft.html',
+ styleUrl: './restaurant-soft.css'
 })
 export class RestaurantSoftComponent implements OnInit {
 

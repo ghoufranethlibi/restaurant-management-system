@@ -1,27 +1,78 @@
-<div class="image_nav">
-<img *ngIf="restaurant.image"
-     [src]="'http://localhost:8083/' + restaurant.image"
-     class="img-fluid mb-3" class="header-image">
-  <div class="header-overlay">
-    <h1>Our Menu</h1>
+<div class="detail-wrapper" *ngIf="restaurant">
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <img
+      *ngIf="restaurant.image"
+      [src]="'http://localhost:8083/' + restaurant.image"
+      class="hero-img"
+      alt="Restaurant"
+    />
+    <div class="hero-no-img" *ngIf="!restaurant.image"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <span class="hero-eyebrow">Notre Établissement</span>
+      <h1 class="hero-title">{{ restaurant.nom }}</h1>
+      <p class="hero-desc" *ngIf="restaurant.description">{{ restaurant.description }}</p>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span class="scroll-line"></span>
+    </div>
+  </div>
+
+  <!-- ── MENU SECTION ── -->
+  <div class="menu-section">
+
+    <div class="menu-header">
+      <div class="menu-header-left">
+        <span class="menu-eyebrow">À la carte</span>
+        <h2 class="menu-title">Notre Menu</h2>
+      </div>
+      <button class="btn-add" (click)="addMenu()">
+        <span class="btn-add-icon">+</span>
+        Ajouter un plat
+      </button>
+    </div>
+
+    <div class="menu-empty" *ngIf="!restaurant.menu || restaurant.menu.length === 0">
+      <span class="empty-deco">✦</span>
+      <p>Aucun plat au menu pour l'instant.</p>
+      <button class="btn-add-inline" (click)="addMenu()">Ajouter le premier plat</button>
+    </div>
+
+    <ul class="menu-list" *ngIf="restaurant.menu && restaurant.menu.length > 0">
+      <li
+        class="menu-item"
+        *ngFor="let m of restaurant.menu; let i = index"
+        [style.animation-delay]="i * 60 + 'ms'"
+      >
+        <div class="item-index">{{ (i + 1).toString().padStart(2, '0') }}</div>
+
+        <div class="item-info">
+          <span class="item-name">{{ m.nom }}</span>
+          <span class="item-price">{{ m.prix }} <em>DT</em></span>
+        </div>
+
+        <div class="item-actions">
+          <button
+            class="action-btn edit-btn"
+            (click)="editPlat(m.id!)"
+            title="Modifier"
+          >
+            <span>✏</span>
+          </button>
+          <button
+            class="action-btn delete-btn"
+            (click)="deleteMenu(m.id!)"
+            title="Supprimer"
+          >
+            <span>✕</span>
+          </button>
+        </div>
+      </li>
+    </ul>
+
   </div>
 </div>
-<div class="container mt-4" *ngIf="restaurant">
-  <h2>{{ restaurant.nom }}</h2>
-  <p>{{ restaurant.description }}</p>
-  <h4>Menu</h4>
-  <ul>
-    <li *ngFor="let m of restaurant.menu">
-      {{ m.nom }} - {{ m.prix }} DT
-      <button matFab aria-label="Example icon button with a delete icon" (click)="deleteMenu(m.id!)" id="supprime">
-        <mat-icon>delete</mat-icon>
-      </button>
-
-&nbsp;
-      <button matFab aria-label="Example icon button with a delete icon" (click)="editPlat(m.id!)" id="modifier">✏️
-      </button>
-    </li>
-  </ul>
-  <button matButton="filled" (click)="addMenu()">➕ Ajouter un plat</button>
-</div>
-

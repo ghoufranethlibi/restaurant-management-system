@@ -1,27 +1,107 @@
+<div class="add-wrapper">
 
-<div class="container mt-4">
-  <h2>➕ Ajouter un restaurant</h2>
-  <form (ngSubmit)="save()" #restaurantForm="ngForm">
-    <div class="mb-3">
-      <label class="form-label">Nom</label>
-      <input type="text" class="form-control" [(ngModel)]="restaurant.nom" name="nom" required>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Adresse</label>
-      <input type="text" class="form-control" [(ngModel)]="restaurant.adresse" name="adresse" required>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Téléphone</label>
-      <input type="text" class="form-control" [(ngModel)]="restaurant.telephone" name="telephone">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Image</label>
-      <input type="file" class="form-control" accept="image/*" (change)="onFileSelected($event)">
-    </div>
-    <button matButton="filled">Save</button>
-    &nbsp;
-    &nbsp;
-    <a routerLink="/restaurants" matButton="outlined">Cancel</a>
-  </form>
+  <div class="add-header">
+    <a class="back-btn" routerLink="/">
+      <span class="back-arrow">←</span>
+      Retour
+    </a>
+    <div class="header-divider"></div>
+    <h1 class="add-title">Ajouter un restaurant</h1>
+    <p class="add-subtitle">Renseignez les informations du nouvel établissement</p>
+  </div>
+
+  <div class="form-card">
+    <form (ngSubmit)="save()" #restaurantForm="ngForm">
+
+      <div class="form-section">
+        <span class="section-label">Informations générales</span>
+      </div>
+
+      <div class="field-group">
+
+        <div class="field">
+          <label class="field-label" for="nom">
+            <span class="field-icon">✦</span> Nom de l'établissement
+          </label>
+          <input
+            id="nom"
+            class="field-input"
+            type="text"
+            [(ngModel)]="restaurant.nom"
+            name="nom"
+            required
+            placeholder="Ex : Le Jardin des Saveurs"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="adresse">
+            <span class="field-icon">✦</span> Adresse
+          </label>
+          <input
+            id="adresse"
+            class="field-input"
+            type="text"
+            [(ngModel)]="restaurant.adresse"
+            name="adresse"
+            required
+            placeholder="Ex : 12 Rue de la Paix, Tunis"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="telephone">
+            <span class="field-icon">✦</span> Téléphone
+          </label>
+          <input
+            id="telephone"
+            class="field-input"
+            type="text"
+            [(ngModel)]="restaurant.telephone"
+            name="telephone"
+            placeholder="Ex : +216 71 234 567"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- IMAGE UPLOAD -->
+        <div class="field">
+          <label class="field-label">
+            <span class="field-icon">✦</span> Photo du restaurant
+          </label>
+
+          <label class="upload-zone" [class.has-preview]="previewUrl">
+            <input
+              type="file"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              class="upload-input"
+            />
+            <ng-container *ngIf="!previewUrl">
+              <span class="upload-icon">📷</span>
+              <span class="upload-text">Cliquez pour choisir une image</span>
+              <span class="upload-hint">JPG, PNG, WEBP — max 5MB</span>
+            </ng-container>
+            <ng-container *ngIf="previewUrl">
+              <img [src]="previewUrl" class="preview-img" alt="Aperçu" />
+              <span class="preview-change">Changer l'image</span>
+            </ng-container>
+          </label>
+        </div>
+
+      </div>
+
+      <div class="form-footer">
+        <a class="btn-cancel" routerLink="/">Annuler</a>
+        <button type="submit" class="btn-save">
+          <span class="save-icon">✓</span>
+          Enregistrer le restaurant
+        </button>
+      </div>
+
+    </form>
+  </div>
+
 </div>
-

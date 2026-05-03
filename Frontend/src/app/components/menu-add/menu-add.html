@@ -1,21 +1,85 @@
+<div class="add-wrapper">
 
-<div class="container mt-4">
-  <h2>➕ Ajouter un menu</h2>
-  <form (ngSubmit)="save()" #menuForm="ngForm">
-    <div class="mb-3">
-      <label class="form-label">Nom du plat</label>
-      <input type="text" class="form-control" [(ngModel)]="menu.nom" name="nom" required>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Prix</label>
-      <input type="number" class="form-control" [(ngModel)]="menu.prix" name="prix" required>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Description</label>
-      <textarea class="form-control" [(ngModel)]="menu.description" name="description"></textarea>
-    </div>
-    <button type="submit" class="btn btn-success">Enregistrer</button>
-    <a [routerLink]="['/menus', menu.restaurantId]" class="btn btn-secondary ms-2">Annuler</a>
-  </form>
+  <div class="add-header">
+    <a class="back-btn" routerLink="/">
+      <span class="back-arrow">←</span>
+      Retour
+    </a>
+    <div class="header-divider"></div>
+    <h1 class="add-title">Ajouter un plat</h1>
+    <p class="add-subtitle">Renseignez les détails du nouveau plat</p>
+  </div>
+
+  <div class="form-card">
+    <form (ngSubmit)="save()">
+
+      <div class="form-section">
+        <span class="section-label">Informations du plat</span>
+      </div>
+
+      <div class="field-group">
+
+        <div class="field">
+          <label class="field-label" for="nom">
+            <span class="field-icon">✦</span> Nom du plat
+          </label>
+          <input
+            id="nom"
+            class="field-input"
+            type="text"
+            [(ngModel)]="menu.nom"
+            name="nom"
+            required
+            placeholder="Ex : Tajine d'agneau"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="description">
+            <span class="field-icon">✦</span> Description
+          </label>
+          <textarea
+            id="description"
+            class="field-input field-textarea"
+            [(ngModel)]="menu.description"
+            name="description"
+            placeholder="Ex : Mijotée aux épices douces, accompagnée de couscous..."
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="prix">
+            <span class="field-icon">✦</span> Prix (DT)
+          </label>
+          <div class="prix-wrapper">
+            <span class="prix-prefix">DT</span>
+            <input
+              id="prix"
+              class="field-input prix-input"
+              type="number"
+              [(ngModel)]="menu.prix"
+              name="prix"
+              required
+              min="0"
+              step="0.1"
+              placeholder="0.00"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-footer">
+        <a class="btn-cancel" routerLink="/">Annuler</a>
+        <button type="submit" class="btn-save">
+          <span class="save-icon">✓</span>
+          Enregistrer le plat
+        </button>
+      </div>
+
+    </form>
+  </div>
+
 </div>
-

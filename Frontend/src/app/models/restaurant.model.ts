@@ -4,6 +4,7 @@ export interface Menu {
   description: string;
   prix: number;
 }
+
 export interface Restaurant {
   id?: string;
   nom: string;
@@ -13,6 +14,5 @@ export interface Restaurant {
   deleted?: boolean;
   telephone?: string;
   menu?: Menu[];
-  image?: String;
+  image?: string;
 }
-

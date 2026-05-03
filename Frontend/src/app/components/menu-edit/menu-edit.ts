@@ -10,7 +10,8 @@ import { ChangeDetectorRef } from '@angular/core';
   standalone: true,
   selector: 'app-menu-edit',
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './menu-edit.html'
+  templateUrl: './menu-edit.html',
+  styleUrl: './menu-edit.css'
 })
 export class MenuEditComponent implements OnInit {
 
